@@ -1,24 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import Paper from '@material-ui/core/Paper'
+import MovieCard from './MovieCard'
+import { Grid } from '@material-ui/core'
 
 const App = () => {
+  const [movies, setMovies] = useState([])
 
   const fetchMovies = () => {
-    // fetch("http://www.omdbapi.com/?apikey=[3d1fca0c]&s=batman")
-    // .then((success) => { success.json() } )
-    // .then((movies) => { console.log(movies) } )
-    // .catch((error)=>{ console.log(error)});
-    fetch("https://movies-tvshows-data-imdb.p.rapidapi.com/?type=get-movies-byyear&page=1&year=2000", {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-key": "a2e3b55477msh0ea9f07ff156ef5p1c0080jsn43c96fb2724b",
-        "x-rapidapi-host": "movies-tvshows-data-imdb.p.rapidapi.com"
-      }  
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(err => {
-      console.error(err);
-    });
+
+    fetch("http://www.omdbapi.com/?s=hey&apikey=a77eded2")
+    .then((success) => success.json() )
+    .then((movies) => setMovies(movies) )
+
   }
 
   useEffect(() => {
@@ -27,7 +20,13 @@ const App = () => {
 
   return (
     <div className="App">
-      
+      <Grid container direction="row">
+        <Paper elevation={3} className={classes.Container}>
+            {movies.map( movie => {
+              return <MovieCard movie={movie} />
+            })}
+        </Paper>
+      </Grid>
     </div>
   );
 }
