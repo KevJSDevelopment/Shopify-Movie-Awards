@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Paper, Typography, Grid} from '@material-ui/core'
 
-const MovieCard = () => {
+const MovieCard = (props) => {
+    useEffect(() => {
+        console.log(props.movie)
+    }, [])
     return (
-        <Paper>
-            
-        </Paper>
+        <Grid item xs={12}>
+            <Paper>
+                <Typography variant="overline">
+                    {props.movie.Title}
+                </Typography>
+            </Paper>
+        </Grid>
     )
 }
 
