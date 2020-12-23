@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Paper, Typography, Grid} from '@material-ui/core'
+import { Paper, Typography, Grid, Slide} from '@material-ui/core'
 
 const MovieCard = (props) => {
     useEffect(() => {
@@ -7,11 +7,16 @@ const MovieCard = (props) => {
     }, [])
     return (
         <Grid item xs={12}>
-            <Paper>
-                <Typography variant="overline">
-                    {props.movie.Title}
-                </Typography>
-            </Paper>
+            <Slide 
+            in={true} 
+            direction="up"
+            {...(true ? { timeout: (props.count + 5) * 100 } : {})}>
+                <Paper>
+                    <Typography variant="overline">
+                        {props.movie.Title}
+                    </Typography>
+                </Paper>
+            </Slide>
         </Grid>
     )
 }

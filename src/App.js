@@ -14,9 +14,11 @@ const App = () => {
     fetch(`http://www.omdbapi.com/?s=${search}&apikey=a77eded2`)
     .then((success) => success.json() )
     .then((movies) => {
-      // debugger
       if(!movies.Error){
         setMovies(movies.Search) 
+      }
+      else if(movies.Error !== "Too many results."){
+        setMovies([])
       }
     })
 
@@ -39,10 +41,9 @@ const App = () => {
                     <Typography variant="overline">
                       Movies
                     </Typography>
-
                   </Grid>
-                    {movies !== [] ? movies.map(movie => {
-                      return <MovieCard movie={movie} />
+                    {movies !== [] ? movies.map((movie, index) => {
+                      return <MovieCard movie={movie} count={index} />
                     }) : null}
                 </Grid>
               </Paper>
