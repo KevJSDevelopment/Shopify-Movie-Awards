@@ -7,16 +7,19 @@ import { Grid, Typography, TextField } from '@material-ui/core'
 const App = () => {
   const [movies, setMovies] = useState([])
   const [nominations, setNominations] = useState([])
+  const [listFull, setListFull] = useState(false)
 
   const fetchMovies = (search) => {
 
     const arr = search.split("")
 
+    const key = process.env.REACT_APP_OMDB_API_KEY
+
     if(search === ""){
       setMovies([])
     }
     if(arr[arr.length - 1] !== " "){
-      fetch(`http://www.omdbapi.com/?s=${search}&apikey=a77eded2`)
+      fetch(`http://www.omdbapi.com/?s=${search}&apikey=${key}`)
       .then((success) => success.json() )
       .then((movies) => {
         if(!movies.Error){
@@ -27,21 +30,28 @@ const App = () => {
 
   }
 
+  const checkListFull = () => {
+    if(nominations.length >= 5){
+      setListFull(true)
+    }
+    else{
+      setListFull(false)
+    }
+  }
   const handleNominated = (movie) => {
-    const arr = nominations
+    const arr = [...nominations]
     arr.push(movie)
     setNominations(arr)
   }
 
   const handleRemoved = (index) => {
-    const arr = nominations
+    const arr = [...nominations]
     arr.splice(index, 1)
     setNominations(arr)
-
   }
 
   useEffect(() => {
-    
+    checkListFull()
   }, [movies, nominations])
 
   return (
@@ -63,7 +73,7 @@ const App = () => {
                     </Typography>
                   </Grid>
                     {movies !== [] ? movies.map((movie, index) => {
-                      return <MovieCard movie={movie} handleNominated={handleNominated} index={index} key={index} />
+                      return <MovieCard movie={movie} listFull={listFull} handleNominated={handleNominated} index={index} key={index} />
                     }) : null}
                 </Grid>
               </Paper>
@@ -78,7 +88,7 @@ const App = () => {
                   </Grid>
                   {nominations !== [] ? nominations.map((nomination, index) => {
                     return <NominationCard nomination={nomination} handleRemoved={handleRemoved} index={index} key={index}/>
-                  }): null}      
+                  }) : null}      
                 </Grid>
               </Paper>             
             </Grid>

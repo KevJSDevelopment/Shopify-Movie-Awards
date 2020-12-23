@@ -24,9 +24,13 @@ const MovieCard = (props) => {
                     <Typography variant="overline" style={{overflowX: true}}>
                         {props.movie.Title.length > 50 ? handleMovieTitle() : props.movie.Title}
                     </Typography>
+                    {!props.listFull ? 
                     <Button variant="outlined" size="small" style={{float: "right" }} color="primary" onClick={() => props.handleNominated(props.movie)}>
                         Nominate
                     </Button>
+                    : <Button variant="outlined" disabled style={{float: "right" }} size="small">
+                        Nominate
+                    </Button>}
                 </Paper>
             </Slide>
         </Grid>
