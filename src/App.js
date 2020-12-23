@@ -7,56 +7,80 @@ import { Grid, Typography, TextField } from '@material-ui/core'
 const App = () => {
   const [movies, setMovies] = useState([])
   const [nominations, setNominations] = useState([])
-  // const [search, setSearch] = useState("")
 
   const fetchMovies = (search) => {
 
-    fetch(`http://www.omdbapi.com/?s=${search}&apikey=a77eded2`)
-    .then((success) => success.json() )
-    .then((movies) => {
-      if(!movies.Error){
-        setMovies(movies.Search) 
-      }
-      else if(movies.Error !== "Too many results."){
-        setMovies([])
-      }
-    })
+    const arr = search.split("")
+
+    if(search === ""){
+      setMovies([])
+    }
+    if(arr[arr.length - 1] !== " "){
+      fetch(`http://www.omdbapi.com/?s=${search}&apikey=a77eded2`)
+      .then((success) => success.json() )
+      .then((movies) => {
+        if(!movies.Error){
+          setMovies(movies.Search) 
+        }
+      })
+    }
 
   }
+
+  const handleNominated = (movie) => {
+    const arr = nominations
+    arr.push(movie)
+    setNominations(arr)
+  }
+
+  const handleRemoved = (index) => {
+    const arr = nominations
+    arr.splice(index, 1)
+    setNominations(arr)
+
+  }
+
+  useEffect(() => {
+    
+  }, [movies, nominations])
 
   return (
     <div className="App">
       <Grid container direction="column" alignItems="center" spacing={3}>
         <Grid item xs={12} style={{width: "100%"}}>
           <Paper elevation={3} style={{textAlign: "center"}} >
-            <TextField id="outlined-search" label="Search Movies" type="search" variant="standard" onChange={(ev) => fetchMovies(ev.target.value)}/>
+            <TextField id="outlined-search" fullWidth={true} label="Search Movies" type="search" variant="standard" onChange={(ev) => fetchMovies(ev.target.value)}/>
           </Paper>
         </Grid>
         <Grid item xs={12} style={{width: "100%"}}>
-          <Grid container direction="row" spacing={3}>
+          <Grid container direction="row" spacing={2}>
             <Grid item xs={6}>
-              <Paper elevation={3} >
-                <Grid container direction="column" spacing={1}>
+              <Paper elevation={3}>
+                <Grid container direction="column" spacing={2}>
                   <Grid item xs={12}>
                     <Typography variant="overline">
                       Movies
                     </Typography>
                   </Grid>
                     {movies !== [] ? movies.map((movie, index) => {
-                      return <MovieCard movie={movie} count={index} />
+                      return <MovieCard movie={movie} handleNominated={handleNominated} index={index} key={index} />
                     }) : null}
                 </Grid>
               </Paper>
             </Grid>
             <Grid item xs={6}>
               <Paper elevation={3}>
-                <Typography variant="overline">
-                    Your Nominated Movies
-                </Typography>
-                {nominations !== [] ? nominations.map( nomination => {
-                  return <NominationCard nomination/>
-                }): null}      
-              </Paper>
+                <Grid container direction="column" spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography variant="overline">
+                        Your Nominated Movies
+                    </Typography>
+                  </Grid>
+                  {nominations !== [] ? nominations.map((nomination, index) => {
+                    return <NominationCard nomination={nomination} handleRemoved={handleRemoved} index={index} key={index}/>
+                  }): null}      
+                </Grid>
+              </Paper>             
             </Grid>
           </Grid>    
         </Grid>
