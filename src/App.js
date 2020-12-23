@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Paper from '@material-ui/core/Paper'
 import MovieCard from './MovieCard'
 import NominationCard from './NominationCard'
-import { Grid, Typography, TextField } from '@material-ui/core'
+import { Grid, Typography, TextField, Button, Grow } from '@material-ui/core'
 
 const App = () => {
   const [movies, setMovies] = useState([])
@@ -30,6 +30,10 @@ const App = () => {
 
   }
 
+  const handleNominate = () => {
+
+  }
+
   const checkListFull = () => {
     if(nominations.length >= 5){
       setListFull(true)
@@ -52,14 +56,17 @@ const App = () => {
 
   useEffect(() => {
     checkListFull()
-  }, [movies, nominations])
+  }, [nominations])
 
   return (
-    <div className="App">
+    <Paper id="App" elevation={3} color="primary" style={{height: window.innerHeight}}>
+      <Typography variant="h2" color="primary" align="center">
+        Shoppies
+      </Typography>
       <Grid container direction="column" alignItems="center" spacing={3}>
         <Grid item xs={12} style={{width: "100%"}}>
           <Paper elevation={3} style={{textAlign: "center"}} >
-            <TextField id="outlined-search" fullWidth={true} label="Search Movies" type="search" variant="standard" onChange={(ev) => fetchMovies(ev.target.value)}/>
+            <TextField id="outlined-search" fullWidth={true} label="Search Movies" type="search" autoComplete="off" variant="standard" onChange={(ev) => fetchMovies(ev.target.value)}/>
           </Paper>
         </Grid>
         <Grid item xs={12} style={{width: "100%"}}>
@@ -88,14 +95,21 @@ const App = () => {
                   </Grid>
                   {nominations !== [] ? nominations.map((nomination, index) => {
                     return <NominationCard nomination={nomination} handleRemoved={handleRemoved} index={index} key={index}/>
-                  }) : null}      
+                  }) : null}  
+                  {listFull ? 
+                    <Grow in={listFull} timeout={3000}>
+                      <Button onClick={() => handleNominate()} variant="contained" style={{float: "right"}} size="small">
+                        Submit Nominations
+                      </Button> 
+                    </Grow>
+                  : null}    
                 </Grid>
               </Paper>             
             </Grid>
           </Grid>    
         </Grid>
       </Grid>
-    </div>
+    </Paper>
   );
 }
 
