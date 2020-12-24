@@ -2,12 +2,38 @@ import React, { useEffect, useState } from 'react'
 import Paper from '@material-ui/core/Paper'
 import MovieCard from './MovieCard'
 import NominationCard from './NominationCard'
-import { Grid, Typography, TextField, Button, Grow } from '@material-ui/core'
+import { Grid, Typography, TextField, Button, Grow, makeStyles } from '@material-ui/core'
+
+const useStyles = makeStyles({
+  root: {
+    height: window.innerHeight
+  },
+  search: {
+    marginRight: "10%",
+    marginLeft: "10%",
+  },
+  movieContainer: {
+    marginLeft: "5%", 
+    
+  },
+  nominationContainer: {
+    marginRight: "1%",
+    marginLeft: "5%"
+  },
+  gridItems: {
+    width: "100%"
+  },
+  text: {
+    textAlign: "center"
+  }
+})
 
 const App = () => {
   const [movies, setMovies] = useState([])
   const [nominations, setNominations] = useState([])
   const [listFull, setListFull] = useState(false)
+
+  const classes = useStyles()
 
   const fetchMovies = (search) => {
 
@@ -59,22 +85,22 @@ const App = () => {
   }, [nominations])
 
   return (
-    <Paper id="App" elevation={3} color="primary" style={{height: window.innerHeight}}>
+    <Paper id="App" elevation={3} color="primary" className={classes.root}>
       <Typography variant="h2" color="primary" align="center">
-        Shoppies
+        Shoppies Movie Awards
       </Typography>
       <Grid container direction="column" alignItems="center" spacing={3}>
-        <Grid item xs={12} style={{width: "100%"}}>
-          <Paper elevation={3} style={{textAlign: "center"}} >
+        <Grid item xs={12} className={classes.gridItems}>
+          <Paper elevation={3} className={classes.search}>
             <TextField id="outlined-search" fullWidth={true} label="Search Movies" type="search" autoComplete="off" variant="standard" onChange={(ev) => fetchMovies(ev.target.value)}/>
           </Paper>
         </Grid>
-        <Grid item xs={12} style={{width: "100%"}}>
+        <Grid item xs={12} className={classes.gridItems}>
           <Grid container direction="row" spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={5} className={classes.movieContainer}>
               <Paper elevation={3}>
                 <Grid container direction="column" spacing={2}>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} className={classes.text}>
                     <Typography variant="overline">
                       Movies
                     </Typography>
@@ -85,10 +111,10 @@ const App = () => {
                 </Grid>
               </Paper>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={5} className={classes.nominationContainer}>
               <Paper elevation={3}>
                 <Grid container direction="column" spacing={2}>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} className={classes.text}>
                     <Typography variant="overline">
                         Your Nominated Movies
                     </Typography>
