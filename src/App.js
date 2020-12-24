@@ -25,6 +25,10 @@ const useStyles = makeStyles({
   },
   text: {
     textAlign: "center"
+  },
+  submit: {
+    width: "94%",
+    margin: "3%",
   }
 })
 
@@ -56,6 +60,17 @@ const App = () => {
 
   }
 
+  const getNominations = () => {
+    let iterator = 0
+    const arr = []
+    while(localStorage.getItem(`nomination-${iterator}`)){
+      const movieArr = localStorage.getItem(`nomination-${iterator}`).split(",")
+      arr.push({ Title: movieArr[0], Year: movieArr[1]})
+      iterator++
+    }
+    setNominations(arr)
+  }
+
   const handleNominate = () => {
     nominations.forEach(nomination => {
       fetch(`http://localhost:3000/nominations`, {
@@ -78,12 +93,26 @@ const App = () => {
     const arr = [...nominations]
     arr.push(movie)
     setNominations(arr)
+    arr.forEach((nomination, index) => {
+      /*
+        Using localStorage instead of storing info in the backend database because user should not be required to sign in.
+        This way:  
+          1) Data still persists 
+          2) User can cast nominations without signing up or signing in
+          3) The only data stored in local storage is publicly accessable information from the api
+      */
+      localStorage.setItem(`nomination-${index}`, [nomination.Title, nomination.Year])
+    })
   }
 
   const handleRemoved = (index) => {
     const arr = [...nominations]
     arr.splice(index, 1)
     setNominations(arr)
+    localStorage.clear()
+    arr.forEach((nomination, index) => {
+      localStorage.setItem(`nomination-${index}`, [nomination.Title, nomination.Year])
+    })
   }
 
 const handleMovieTitle = (title) => {
@@ -106,6 +135,10 @@ const handleMovieTitle = (title) => {
   useEffect(() => {
     checkListFull()
   }, [nominations])
+
+  useEffect(()=> {
+    getNominations()
+  }, [])
 
   return (
     <Paper id="App" elevation={3} color="primary" className={classes.root}>
@@ -147,7 +180,7 @@ const handleMovieTitle = (title) => {
                   }) : null}  
                   {listFull ? 
                     <Grow in={listFull} timeout={3000}>
-                      <Button onClick={() => handleNominate()} variant="contained" style={{float: "right"}} size="small">
+                      <Button onClick={() => handleNominate()} variant="contained" className={classes.submit} size="small">
                         Submit Nominations
                       </Button> 
                     </Grow>
