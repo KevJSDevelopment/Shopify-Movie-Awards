@@ -86,6 +86,23 @@ const App = () => {
     setNominations(arr)
   }
 
+const handleMovieTitle = (title) => {
+    const string = title.substring(0, 45) + "..."
+   return string
+}
+
+  const handleYear = (year) => {
+    const stringLength = year.length
+    const lastChar = year.charAt(stringLength - 1)
+
+    if(parseInt(lastChar) || lastChar === "0"){
+        return year
+    }
+    
+    year = year.substring(0, stringLength - 1)
+    return year
+  }
+
   useEffect(() => {
     checkListFull()
   }, [nominations])
@@ -112,7 +129,7 @@ const App = () => {
                     </Typography>
                   </Grid>
                     {movies !== [] ? movies.map((movie, index) => {
-                      return <MovieCard movie={movie} listFull={listFull} handleNominated={handleNominated} index={index} key={index} />
+                      return <MovieCard movie={movie} listFull={listFull} handleMovieTitle={handleMovieTitle} handleYear={handleYear} handleNominated={handleNominated} index={index} key={index} />
                     }) : null}
                 </Grid>
               </Paper>
@@ -126,7 +143,7 @@ const App = () => {
                     </Typography>
                   </Grid>
                   {nominations !== [] ? nominations.map((nomination, index) => {
-                    return <NominationCard nomination={nomination} handleRemoved={handleRemoved} index={index} key={index}/>
+                    return <NominationCard nomination={nomination} handleMovieTitle={handleMovieTitle} handleYear={handleYear} handleRemoved={handleRemoved} index={index} key={index}/>
                   }) : null}  
                   {listFull ? 
                     <Grow in={listFull} timeout={3000}>
