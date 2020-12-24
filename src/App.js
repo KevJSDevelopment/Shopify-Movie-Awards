@@ -57,7 +57,13 @@ const App = () => {
   }
 
   const handleNominate = () => {
-
+    nominations.forEach(nomination => {
+      fetch(`http://localhost:3000/nominations`, {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({title: nomination.title, year:nomination.year})
+      })
+    })
   }
 
   const checkListFull = () => {

@@ -6,12 +6,24 @@ const useStyles = makeStyles({
 })
 
 const MovieCard = (props) => {
-
+    
     const [hover, setHover] = useState(false)
 
     const handleMovieTitle = () => {
        const string = props.movie.Title.substring(0, 45) + "..."
        return string
+    }
+
+    const handleYear = (year = props.movie.Year) => {
+        const stringLength = year.length
+        const lastChar = year.charAt(stringLength - 1)
+
+        if(parseInt(lastChar)){
+            return year
+        }
+        
+        year = year.substring(0, stringLength - 1)
+        return year
     }
 
     return (
@@ -22,7 +34,7 @@ const MovieCard = (props) => {
             {...(true ? { timeout: (props.index + 5) * 100 } : {})}>
                 <Paper id={`movie-paper-${props.index}`} elevation={!hover ? 3 : 20} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
                     <Typography variant="overline" style={{overflowX: true}}>
-                        {props.movie.Title.length > 50 ? handleMovieTitle() : props.movie.Title}
+                        {props.movie.Title.length > 45 ? handleMovieTitle() : props.movie.Title} ({handleYear()})
                     </Typography>
                     {!props.listFull ? 
                     <Button variant="outlined" size="small" style={{float: "right" }} color="primary" onClick={() => props.handleNominated(props.movie)}>
