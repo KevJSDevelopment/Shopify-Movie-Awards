@@ -78,6 +78,10 @@ const App = () => {
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify({title: nomination.title, year:nomination.year})
       })
+      .then(res => res.json())
+      .then(data => {
+
+      })
     })
   }
 
@@ -117,7 +121,7 @@ const App = () => {
 
 const handleMovieTitle = (title) => {
     const string = title.substring(0, 45) + "..."
-   return string
+    return string
 }
 
   const handleYear = (year) => {
