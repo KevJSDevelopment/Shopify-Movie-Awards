@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Paper from '@material-ui/core/Paper'
 import {Typography, makeStyles } from '@material-ui/core'
 import Nominations from './Nominations'
-import CurrentResults from './CurrentResults'
+import CheckResults from './CheckResults'
 import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles({
@@ -165,7 +165,7 @@ const handleMovieTitle = (title) => {
         Shoppies Movie Awards
       </Typography>
       {transitionComplete ? null : <Nominations submitted={submitted} classes={classes} movies={movies} nominations={nominations} fetchMovies={fetchMovies} listFull={listFull} handleYear={handleYear} handleNominated={handleNominated} handleMovieTitle={handleMovieTitle} handleRemoved={handleRemoved} handleNominate={handleNominate}/>}
-      {transitionComplete ? <CurrentResults submitted={submitted} /> : null}
+      {transitionComplete ? <CheckResults submitted={submitted} /> : null}
     </Paper>
   );
 }
