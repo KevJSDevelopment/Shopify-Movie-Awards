@@ -82,7 +82,7 @@ const NominationResult = (props) => {
             {...(true ? { timeout: (props.index + 5) * 300 } : {})}>
                 <Paper id={`nomination-paper-${props.index}`} className={handleClass()} elevation={3}>
                     <Typography variant="overline">
-                        {handlePlacement()} {props.nomination.title.length > handleTextWidth() ? props.handleMovieTitle(props.nomination.title, handleTextWidth()) : props.nomination.title} ({props.handleYear(props.nomination.year)}): Nominations - {props.nomination.total}
+                        {props.nomination.title.length > handleTextWidth() ? props.handleMovieTitle(props.nomination.title, handleTextWidth()) : props.nomination.title} ({props.handleYear(props.nomination.year)}): Nominations - {props.nomination.total}
                     </Typography>
                 </Paper>
             </Grow>

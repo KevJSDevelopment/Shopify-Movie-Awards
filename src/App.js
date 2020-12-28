@@ -32,9 +32,10 @@ const useStyles = makeStyles({
     margin: "3%",
   },
   results: {
-    width: "94%",
+    width: "25%",
     margin: "3%",
-    borderRadius: "5px 50px 50px 5px"
+    borderRadius: "5px 50px 50px 5px",
+    float: "right"
   },
   header: {
     marginBottom: "1%"
@@ -177,7 +178,7 @@ const handleMovieTitle = (title, length) => {
         </Typography>
       </Paper>
       {resultsPage ? null : <Nominations submitted={submitted} setResultsPage={setResultsPage} transitioning={transitioning} classes={classes} movies={movies} nominations={nominations} fetchMovies={fetchMovies} listFull={listFull} handleYear={handleYear} handleNominated={handleNominated} handleMovieTitle={handleMovieTitle} handleRemoved={handleRemoved} handleNominate={handleNominate}/>}
-      {resultsPage ? <CheckResults submitted={submitted} setTransitioning={setTransitioning} setResultsPage={setResultsPage} handleYear={handleYear} handleMovieTitle={handleMovieTitle} /> : null}
+      {resultsPage ? <CheckResults submitted={submitted} nominations={nominations} setTransitioning={setTransitioning} setResultsPage={setResultsPage} handleYear={handleYear} handleMovieTitle={handleMovieTitle} /> : null}
     </Paper>
   );
 }

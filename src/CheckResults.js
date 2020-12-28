@@ -3,8 +3,12 @@ import { Grow, Grid, Typography, Paper, Button } from '@material-ui/core'
 import { makeStyles }from '@material-ui/core/styles'
 import NominationList from './NominationList'
 import Key from './Key'
+import MyNominations from './MyNominations'
 
 const useStyles = makeStyles({
+    mainContainer: {
+        marginLeft: "1%"
+    },
     results: {
         textAlign: "center",
         marginLeft: "45%",
@@ -29,7 +33,7 @@ const CheckResults = (props) => {
 
     return (
         <Grow in={props.submitted} direction="left" timeout={{enter:  1000}}>
-            <Grid container direction="column" alignItems="center">
+            <Grid container direction="column" alignItems="center" className={classes.mainContainer}>
                 <Grid item xs={12}>
                     <Button variant="contained" size="small" color="primary" className={classes.back} onClick={() => handleBack()}>
                         Back to search
@@ -43,32 +47,27 @@ const CheckResults = (props) => {
                     </Grow>
                 </Grid>
                 <Grid item xs={12}>
-                    <Grow in={props.submitted} direction="left" timeout={{enter:  3000}}>
                     <Grid container direction="row" spacing={3}>
                         <Grid item xs={1}>
-
+                            {/* <Grow in={props.submitted} direction="left" timeout={{enter:  6000}}>
+                                <Key />
+                            </Grow> */}
                         </Grid>
                         <Grid item xs={5}>
                             <Grow in={props.submitted} direction="left" timeout={{enter:  4000}}>
                                 <NominationList handleYear={props.handleYear} handleMovieTitle={props.handleMovieTitle}/>
                             </Grow>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={5}>
                             <Grid container direction="column">
                                 <Grid item xs={12}>
                                     <Grow in={props.submitted} direction="left" timeout={{enter:  5000}}>
-                                        <Key />
+                                        <MyNominations nominations={props.nominations}/>                                      
                                     </Grow>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    {/* <Grow in={props.submitted} direction="left" timeout={{enter:  6000}}>
-
-                                    </Grow> */}
                                 </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
-                    </Grow>
                 </Grid>
             </Grid>
         </Grow>

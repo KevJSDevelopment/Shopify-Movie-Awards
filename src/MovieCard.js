@@ -21,7 +21,7 @@ const MovieCard = (props) => {
             {...(true ? { timeout: (props.index + 5) * 100 } : {})}>
                 <Paper id={`movie-paper-${props.index}`} elevation={!hover ? 3 : 20} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
                     <Typography variant="overline" style={{overflowX: true}}>
-                        {props.movie.Title.length > 45 ? props.handleMovieTitle(props.movie.Title) : props.movie.Title} ({props.handleYear(props.movie.Year)})
+                        {props.movie.Title.length > 45 ? props.handleMovieTitle(props.movie.Title, 45) : props.movie.Title} ({props.handleYear(props.movie.Year)})
                     </Typography>
                     {!props.listFull ? 
                     <Button variant="outlined" size="small" style={{float: "right" }} color="primary" onClick={() => props.handleNominated(props.movie)}>

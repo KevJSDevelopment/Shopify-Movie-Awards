@@ -1,7 +1,8 @@
 import React from 'react'
 import MovieCard from './MovieCard'
 import NominationCard from './NominationCard'
-import {Grid, TextField, Button, Grow, Paper, Typography, Slide} from '@material-ui/core'
+import {Grid, TextField, Button, Grow, Paper, Typography, Slide, makeStyles} from '@material-ui/core'
+
 
 const Nominations = (props) => {
 
@@ -52,8 +53,8 @@ const Nominations = (props) => {
                                     : null}    
                                 </Grid>
                             </Paper> 
-                            <Grow in={props.submitted} timeout={1000}>
-                                <Button onClick={() => props.setResultsPage(true)} color="primary" variant="contained" className={props.classes.results} size="small">
+                            <Grow in={props.submitted} timeout={1000} className={props.classes.results}>
+                                <Button onClick={() => props.setResultsPage(true)} color="primary" variant="contained" size="small">
                                     See Results
                                 </Button>    
                             </Grow>

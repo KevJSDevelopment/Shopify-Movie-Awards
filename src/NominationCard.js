@@ -24,7 +24,7 @@ const NominationCard = (props) => {
             {...(true ? { timeout: (props.index + 5) * 100 } : {})}>
                 <Paper id={`nomination-paper-${props.index}`} elevation={!hover ? 3 : 20} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
                     <Typography variant="overline" style={{overflowX: true}}>
-                        {props.nomination.Title.length > 45 ? props.handleMovieTitle(props.nomination.Title) : props.nomination.Title} ({props.handleYear(props.nomination.Year)})
+                        {props.nomination.Title.length > 40 ? props.handleMovieTitle(props.nomination.Title) : props.nomination.Title} ({props.handleYear(props.nomination.Year)})
                     </Typography>
                     {!props.submitted ? <Button variant="outlined" size="small" className={classes.button} color="primary" onClick={() => props.handleRemoved(props.index)}>
                         Remove
