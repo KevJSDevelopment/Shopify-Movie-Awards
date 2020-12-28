@@ -1,13 +1,61 @@
 import React, { useEffect, useState } from 'react'
 import Paper from '@material-ui/core/Paper'
-import {Typography, makeStyles } from '@material-ui/core'
+import {Typography, makeStyles, Button } from '@material-ui/core'
 import Nominations from './Nominations'
 import CheckResults from './CheckResults'
 import Alert from '@material-ui/lab/Alert';
+import {ThemeProvider, createMuiTheme} from '@material-ui/core'
+
+const theme1 = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#bef67a',
+      main: '#8bc34a',
+      dark: '#5a9216',
+      contrastText: '#222222',
+    },
+    secondary: {
+      light: '#888888',
+      main: '#5b5b5b',
+      dark: '#323232',
+      contrastText: '#689f38',
+    }
+  },
+  typography: {
+    fontFamily: [
+      'Arvo'
+    ].join(','),
+  },
+})
+
+const theme2 = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#bef67a',
+      main: '#8bc34a',
+      dark: '#5a9216',
+      contrastText: '#222222',
+    },
+    secondary: {
+      light: '#FFFFFF',
+      main: '#FFFFFF',
+      dark: '#whitesmoke',
+      contrastText: '#689f38',
+    }
+  },
+  typography: {
+    fontFamily: [
+      'Arvo'
+    ].join(','),
+  },
+})
 
 const useStyles = makeStyles({
   root: {
     height: window.innerHeight * 1.10
+  },
+  header: {
+    marginBottom: "1%"
   },
   search: {
     marginRight: "10%",
@@ -37,9 +85,6 @@ const useStyles = makeStyles({
     borderRadius: "5px 50px 50px 5px",
     float: "right"
   },
-  header: {
-    marginBottom: "1%"
-  }
 })
 
 const App = () => {
@@ -49,7 +94,7 @@ const App = () => {
   const [submitted, setSubmitted] = useState(false)
   const [resultsPage, setResultsPage] = useState(false)
   const [transitioning, setTransitioning] = useState(false)
-
+  const [darkMode, setDarkMode] = useState(true)
   const classes = useStyles()
 
   const fetchMovies = (search) => {
@@ -171,15 +216,17 @@ const handleMovieTitle = (title, length) => {
   }, [])
 
   return (
-    <Paper id="App" elevation={3} color="primary" className={classes.root}>
-      <Paper elevation={3} className={classes.header}>
-        <Typography variant="h2" color="primary" align="center">
-          Shoppies Movie Awards
-        </Typography>
+    <ThemeProvider theme={darkMode ? theme1 : theme2}>
+      <Paper id="App" elevation={3} className={classes.root} style={{backgroundColor: darkMode ? theme1.palette.secondary.dark : theme2.palette.secondary.main}}>
+        <Paper elevation={3} className={classes.header} style={{backgroundColor: darkMode ? theme1.palette.secondary.main : theme2.palette.secondary.light}}>
+          <Typography variant="h2" color="primary" align="center">
+            Shoppies Movie Awards
+          </Typography>
+        </Paper>
+        {resultsPage ? null : <Nominations submitted={submitted} setResultsPage={setResultsPage} transitioning={transitioning} classes={classes} movies={movies} nominations={nominations} fetchMovies={fetchMovies} listFull={listFull} handleYear={handleYear} handleNominated={handleNominated} handleMovieTitle={handleMovieTitle} handleRemoved={handleRemoved} handleNominate={handleNominate}/>}
+        {resultsPage ? <CheckResults submitted={submitted} nominations={nominations} setTransitioning={setTransitioning} setResultsPage={setResultsPage} handleYear={handleYear} handleMovieTitle={handleMovieTitle} /> : null}
       </Paper>
-      {resultsPage ? null : <Nominations submitted={submitted} setResultsPage={setResultsPage} transitioning={transitioning} classes={classes} movies={movies} nominations={nominations} fetchMovies={fetchMovies} listFull={listFull} handleYear={handleYear} handleNominated={handleNominated} handleMovieTitle={handleMovieTitle} handleRemoved={handleRemoved} handleNominate={handleNominate}/>}
-      {resultsPage ? <CheckResults submitted={submitted} nominations={nominations} setTransitioning={setTransitioning} setResultsPage={setResultsPage} handleYear={handleYear} handleMovieTitle={handleMovieTitle} /> : null}
-    </Paper>
+    </ThemeProvider>
   );
 }
 

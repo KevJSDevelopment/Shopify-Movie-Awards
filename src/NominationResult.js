@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Grow from '@material-ui/core/Grow'
 import { Grid, Paper, Typography, makeStyles } from '@material-ui/core'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     first: {
         marginLeft: "2%",
         marginRight: "2%",
@@ -28,9 +28,10 @@ const useStyles = makeStyles({
         width: "80%",
         marginLeft: "8%",
         marginRight: "8%",
-        padding: "5px"
+        padding: "5px",
+        backgroundColor: theme.palette.secondary.light
     }
-})
+}))
 
 const NominationResult = (props) => {
 

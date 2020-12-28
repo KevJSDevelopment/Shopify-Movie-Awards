@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { Paper, Typography, Grid, Slide, Button , makeStyles} from '@material-ui/core'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     item: {
         marginLeft:"1%", 
-        marginRight: "1%"
+        marginRight: "1%",
+    },
+    paper: {
+        backgroundColor: theme.palette.secondary.light
     }
-})
+}))
 
 const MovieCard = (props) => {
     
@@ -19,7 +22,7 @@ const MovieCard = (props) => {
             in={true} 
             direction="up"
             {...(true ? { timeout: (props.index + 5) * 100 } : {})}>
-                <Paper id={`movie-paper-${props.index}`} elevation={!hover ? 3 : 20} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+                <Paper id={`movie-paper-${props.index}`} className={classes.paper} elevation={!hover ? 3 : 20} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
                     <Typography variant="overline" style={{overflowX: true}}>
                         {props.movie.Title.length > 45 ? props.handleMovieTitle(props.movie.Title, 45) : props.movie.Title} ({props.handleYear(props.movie.Year)})
                     </Typography>

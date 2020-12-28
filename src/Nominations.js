@@ -3,23 +3,55 @@ import MovieCard from './MovieCard'
 import NominationCard from './NominationCard'
 import {Grid, TextField, Button, Grow, Paper, Typography, Slide, makeStyles} from '@material-ui/core'
 
+const useStyles = makeStyles(theme => ({
+    search: {
+      marginRight: "10%",
+      marginLeft: "10%",
+      backgroundColor: theme.palette.secondary.main
+    },
+    movieContainer: {
+      marginLeft: "5%", 
+      
+    },
+    gridItems: {
+      width: "100%"
+    },
+    text: {
+      textAlign: "center"
+    },
+    submit: {
+      width: "94%",
+      margin: "3%",
+    },
+    results: {
+      width: "25%",
+      margin: "3%",
+      borderRadius: "5px 50px 50px 5px",
+      float: "right"
+    },
+    paper: {
+        backgroundColor: theme.palette.secondary.main
+    }
+  }))
 
 const Nominations = (props) => {
+
+    const classes = useStyles()
 
     return (
         <Slide in={!props.transitioning} direction="right" timeout={{exit: 2000, enter:  0}}>
             <Grid container direction="column" alignItems="center" spacing={3}>
-                <Grid item xs={12} className={props.classes.gridItems}>
-                    <Paper elevation={3} className={props.classes.search}>
+                <Grid item xs={12} className={classes.gridItems}>
+                    <Paper elevation={3} className={classes.search}>
                         <TextField id="outlined-search" fullWidth={true} label="Search Movies" type="search" autoComplete="off" variant="standard" onChange={(ev) => props.fetchMovies(ev.target.value)}/>
                     </Paper>
                 </Grid>
-                <Grid item xs={12} className={props.classes.gridItems}>
+                <Grid item xs={12} className={classes.gridItems}>
                     <Grid container direction="row" spacing={2}>
-                        <Grid item xs={5} className={props.classes.movieContainer}>
-                            <Paper elevation={3}>
+                        <Grid item xs={5} className={classes.movieContainer}>
+                            <Paper elevation={3} className={classes.paper}>
                                 <Grid container direction="column" spacing={2}>
-                                <Grid item xs={12} className={props.classes.text}>
+                                <Grid item xs={12} className={classes.text}>
                                     <Typography variant="overline">
                                     Movies
                                     </Typography>
@@ -30,10 +62,13 @@ const Nominations = (props) => {
                                 </Grid>
                             </Paper>
                         </Grid>
-                        <Grid item xs={5} className={props.classes.nominationContainer}>
-                            <Paper elevation={3}>
+                        <Grid item xs={1}>
+
+                        </Grid>
+                        <Grid item xs={5} className={classes.nominationContainer}>
+                            <Paper elevation={3} className={classes.paper}>
                                 <Grid container direction="column" spacing={2}>
-                                    <Grid item xs={12} className={props.classes.text}>
+                                    <Grid item xs={12} className={classes.text}>
                                         <Typography variant="overline">
                                             Your Nominated Movies
                                         </Typography>
@@ -43,17 +78,17 @@ const Nominations = (props) => {
                                     }) : null}  
                                     {props.listFull ? 
                                         <Grow in={props.listFull} timeout={3000}>
-                                            {!props.submitted ? <Button onClick={() => props.handleNominate()} variant="contained" className={props.classes.submit} size="small">
+                                            {!props.submitted ? <Button onClick={() => props.handleNominate()} color="primary" variant="contained" className={classes.submit} size="small">
                                                 Submit Nominations
                                             </Button> : 
-                                            <Button variant="contained" className={props.classes.submit} disabled size="small">
+                                            <Button variant="contained" className={classes.submit} disabled size="small">
                                                 Submit Nominations
                                             </Button>}
                                         </Grow>
                                     : null}    
                                 </Grid>
                             </Paper> 
-                            <Grow in={props.submitted} timeout={1000} className={props.classes.results}>
+                            <Grow in={props.submitted} timeout={1000} className={classes.results}>
                                 <Button onClick={() => props.setResultsPage(true)} color="primary" variant="contained" size="small">
                                     See Results
                                 </Button>    
