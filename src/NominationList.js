@@ -1,11 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
+import {makeStyles} from '@material-ui/core/styles'
 import NominationResult from './NominationResult'
+import { Typography } from '@material-ui/core'
 
-const NominationList = () => {
+const useStyles = makeStyles({
+    list: {
+        overflowY: "auto",
+        maxHeight: window.innerHeight * .75,
+        padding: "1%"
+    },
+    title: {
+        textAlign: "center"
+    }
+})
+
+const NominationList = (props) => {
 
     const [allNominations, setAllNominations] = useState([])
+
+    const classes = useStyles()
 
     const getAllNominations = async () => {
         const res = await fetch(`http://localhost:3000/nominations`)
@@ -19,17 +34,18 @@ const NominationList = () => {
     useEffect(() => {
         getAllNominations()
     }, [])
-    return (
-        <Paper variant="elevation" elevation={3}>
-            <Grid container direction="column">
-                <Grid item xs={12}>
 
+    return (
+        <Paper variant="elevation" elevation={3} className={classes.list}>
+            <Grid container direction="column">
+                <Grid item xs={12} className={classes.title}>
+                    <Typography variant="overline">
+                        <u>Nominations</u>
+                    </Typography>
                 </Grid>
-                <Grid item xs={12}>
-                    {allNominations.map(nomination => {
-                        return <NominationResult nomination={nomination} />
-                    })}
-                </Grid>
+                {allNominations !== [] ? allNominations.map( (nomination, index) => {
+                    return <NominationResult nomination={nomination} handleYear={props.handleYear} handleMovieTitle={props.handleMovieTitle} index={index} key={index} />
+                }) : null}
             </Grid>   
         </Paper>
     )

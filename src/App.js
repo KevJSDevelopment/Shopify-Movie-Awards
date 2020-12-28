@@ -134,8 +134,8 @@ const App = () => {
     })
   }
 
-const handleMovieTitle = (title) => {
-    const string = title.substring(0, 45) + "..."
+const handleMovieTitle = (title, length) => {
+    const string = title.substring(0, length) + "..."
     return string
 }
 
@@ -165,7 +165,7 @@ const handleMovieTitle = (title) => {
         Shoppies Movie Awards
       </Typography>
       {transitionComplete ? null : <Nominations submitted={submitted} classes={classes} movies={movies} nominations={nominations} fetchMovies={fetchMovies} listFull={listFull} handleYear={handleYear} handleNominated={handleNominated} handleMovieTitle={handleMovieTitle} handleRemoved={handleRemoved} handleNominate={handleNominate}/>}
-      {transitionComplete ? <CheckResults submitted={submitted} /> : null}
+      {transitionComplete ? <CheckResults submitted={submitted} handleYear={handleYear} handleMovieTitle={handleMovieTitle} /> : null}
     </Paper>
   );
 }
