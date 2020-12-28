@@ -26,9 +26,11 @@ const NominationCard = (props) => {
                     <Typography variant="overline" style={{overflowX: true}}>
                         {props.nomination.Title.length > 45 ? props.handleMovieTitle(props.nomination.Title) : props.nomination.Title} ({props.handleYear(props.nomination.Year)})
                     </Typography>
-                    <Button variant="outlined" size="small" className={classes.button} color="primary" onClick={() => props.handleRemoved(props.index)}>
+                    {!props.submitted ? <Button variant="outlined" size="small" className={classes.button} color="primary" onClick={() => props.handleRemoved(props.index)}>
                         Remove
-                    </Button>
+                    </Button> : <Button variant="outlined"  disabled size="small" className={classes.button}>
+                        Remove
+                    </Button>}
                 </Paper>
             </Slide>
         </Grid>

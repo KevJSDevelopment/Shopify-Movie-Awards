@@ -7,7 +7,7 @@ import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles({
   root: {
-    height: window.innerHeight
+    height: window.innerHeight * 1.10
   },
   search: {
     marginRight: "10%",
@@ -30,6 +30,14 @@ const useStyles = makeStyles({
   submit: {
     width: "94%",
     margin: "3%",
+  },
+  results: {
+    width: "94%",
+    margin: "3%",
+    borderRadius: "5px 50px 50px 5px"
+  },
+  header: {
+    marginBottom: "1%"
   }
 })
 
@@ -38,7 +46,8 @@ const App = () => {
   const [nominations, setNominations] = useState([])
   const [listFull, setListFull] = useState(false)
   const [submitted, setSubmitted] = useState(false)
-  const [transitionComplete, setTransitionComplete] = useState(false)
+  const [resultsPage, setResultsPage] = useState(false)
+  const [transitioning, setTransitioning] = useState(false)
 
   const classes = useStyles()
 
@@ -63,8 +72,8 @@ const App = () => {
 
   }
 
-  const handleTransitionComplete = () => {
-    setTransitionComplete(true)
+  const handleresultsPage = () => {
+    setResultsPage(true)
   }
 
   const getNominations = () => {
@@ -72,7 +81,7 @@ const App = () => {
     const arr = []
     if(localStorage.getItem("submitted")){
       setSubmitted(true)
-      setTransitionComplete(true)
+      setResultsPage(true)
     }
     while(localStorage.getItem(`nomination-${iterator}`)){
       const movieArr = localStorage.getItem(`nomination-${iterator}`).split(",")
@@ -96,7 +105,8 @@ const App = () => {
     })
     localStorage.setItem("submitted", "true")
     setSubmitted(true)
-    setTimeout(handleTransitionComplete, 2500)
+    setTransitioning(true)
+    setTimeout(handleresultsPage, 2500)
     // return <Alert severity="success"> Successfully nominated: {nominations.forEach(nomination => `${nomination.Title}, (${nomination.Year}), `)} </Alert>
   }
 
@@ -161,11 +171,13 @@ const handleMovieTitle = (title, length) => {
 
   return (
     <Paper id="App" elevation={3} color="primary" className={classes.root}>
-      <Typography variant="h2" color="primary" align="center">
-        Shoppies Movie Awards
-      </Typography>
-      {transitionComplete ? null : <Nominations submitted={submitted} classes={classes} movies={movies} nominations={nominations} fetchMovies={fetchMovies} listFull={listFull} handleYear={handleYear} handleNominated={handleNominated} handleMovieTitle={handleMovieTitle} handleRemoved={handleRemoved} handleNominate={handleNominate}/>}
-      {transitionComplete ? <CheckResults submitted={submitted} handleYear={handleYear} handleMovieTitle={handleMovieTitle} /> : null}
+      <Paper elevation={3} className={classes.header}>
+        <Typography variant="h2" color="primary" align="center">
+          Shoppies Movie Awards
+        </Typography>
+      </Paper>
+      {resultsPage ? null : <Nominations submitted={submitted} setResultsPage={setResultsPage} transitioning={transitioning} classes={classes} movies={movies} nominations={nominations} fetchMovies={fetchMovies} listFull={listFull} handleYear={handleYear} handleNominated={handleNominated} handleMovieTitle={handleMovieTitle} handleRemoved={handleRemoved} handleNominate={handleNominate}/>}
+      {resultsPage ? <CheckResults submitted={submitted} setTransitioning={setTransitioning} setResultsPage={setResultsPage} handleYear={handleYear} handleMovieTitle={handleMovieTitle} /> : null}
     </Paper>
   );
 }

@@ -4,8 +4,9 @@ import NominationCard from './NominationCard'
 import {Grid, TextField, Button, Grow, Paper, Typography, Slide} from '@material-ui/core'
 
 const Nominations = (props) => {
+
     return (
-        <Slide in={!props.submitted} direction="right" timeout={{exit: 2000, enter:  0}}>
+        <Slide in={!props.transitioning} direction="right" timeout={{exit: 2000, enter:  0}}>
             <Grid container direction="column" alignItems="center" spacing={3}>
                 <Grid item xs={12} className={props.classes.gridItems}>
                     <Paper elevation={3} className={props.classes.search}>
@@ -37,17 +38,25 @@ const Nominations = (props) => {
                                         </Typography>
                                     </Grid>
                                     {props.nominations !== [] ? props.nominations.map((nomination, index) => {
-                                        return <NominationCard nomination={nomination} handleMovieTitle={props.handleMovieTitle} handleYear={props.handleYear} handleRemoved={props.handleRemoved} index={index} key={index}/>
+                                        return <NominationCard nomination={nomination} submitted={props.submitted} handleMovieTitle={props.handleMovieTitle} handleYear={props.handleYear} handleRemoved={props.handleRemoved} index={index} key={index}/>
                                     }) : null}  
                                     {props.listFull ? 
                                         <Grow in={props.listFull} timeout={3000}>
-                                        <Button onClick={() => props.handleNominate()} variant="contained" className={props.classes.submit} size="small">
-                                            Submit Nominations
-                                        </Button> 
+                                            {!props.submitted ? <Button onClick={() => props.handleNominate()} variant="contained" className={props.classes.submit} size="small">
+                                                Submit Nominations
+                                            </Button> : 
+                                            <Button variant="contained" className={props.classes.submit} disabled size="small">
+                                                Submit Nominations
+                                            </Button>}
                                         </Grow>
                                     : null}    
                                 </Grid>
-                            </Paper>             
+                            </Paper> 
+                            <Grow in={props.submitted} timeout={1000}>
+                                <Button onClick={() => props.setResultsPage(true)} color="primary" variant="contained" className={props.classes.results} size="small">
+                                    See Results
+                                </Button>    
+                            </Grow>
                         </Grid>
                     </Grid>    
                 </Grid>

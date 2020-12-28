@@ -8,7 +8,7 @@ import { Typography } from '@material-ui/core'
 const useStyles = makeStyles({
     list: {
         overflowY: "auto",
-        maxHeight: window.innerHeight * .75,
+        maxHeight: window.innerHeight * .7,
         padding: "1%"
     },
     title: {
