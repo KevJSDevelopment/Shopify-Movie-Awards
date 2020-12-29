@@ -11,8 +11,7 @@ const useStyles = makeStyles(theme => ({
       color: theme.palette.secondary.contrastText
     },
     movieContainer: {
-      marginLeft: "5%", 
-      
+      marginLeft: "5%"
     },
     gridItems: {
       width: "100%"
@@ -33,9 +32,14 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         backgroundColor: theme.palette.secondary.main,
-        color: theme.palette.secondary.contrastText
+        color: theme.palette.secondary.contrastText,
+        maxHeight: window.innerHeight * .8,
+        overflowY: "auto"
     },
     label: {
+        color: theme.palette.secondary.contrastText,
+    },
+    input: {
         color: theme.palette.secondary.contrastText,
     },
 }))
@@ -49,14 +53,14 @@ const Nominations = (props) => {
             <Grid container direction="column" alignItems="center" spacing={3}>
                 <Grid item xs={12} className={classes.gridItems}>
                     <Paper elevation={3} className={classes.search}>
-                        <TextField id="outlined-search" fullWidth={true} InputLabelProps={{className: classes.label}} label="Search Movies" type="search" autoComplete="off" variant="standard" onChange={(ev) => props.fetchMovies(ev.target.value)}/>
+                        <TextField id="outlined-search" fullWidth={true} InputLabelProps={{className: classes.label}} InputProps={{className: classes.input}} label="Search Movies" type="search" autoComplete="off" variant="standard" onChange={(ev) => props.fetchMovies(ev.target.value)}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} className={classes.gridItems}>
                     <Grid container direction="row" spacing={2}>
                         <Grid item xs={5} className={classes.movieContainer}>
                             <Paper elevation={3} className={classes.paper}>
-                                <Grid container direction="column" spacing={2}>
+                                <Grid container direction="column">
                                 <Grid item xs={12} className={classes.text}>
                                     <Typography variant="overline">
                                     Movies

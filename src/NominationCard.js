@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Paper, Typography, Grid, Slide, Button , makeStyles, useTheme} from '@material-ui/core'
+import { Paper, Typography, Grid, Slide, Button , makeStyles} from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
     item: {
@@ -7,11 +7,13 @@ const useStyles = makeStyles(theme => ({
         marginRight: "1%"
     },
     button: {
-        float: "right"
+        float: "right",
+        color: theme.palette.secondary.contrastText
     },
     paper: {
         backgroundColor: theme.palette.secondary.light,
-        color: theme.palette.secondary.contrastText
+        color: theme.palette.secondary.contrastText,
+        padding: "1%"
     }
 }))
 
@@ -19,6 +21,7 @@ const NominationCard = (props) => {
 
     const [hover, setHover] = useState(false)
     const classes = useStyles()
+
     return (
         <Grid item xs={12} className={classes.item}>
             <Slide 
@@ -29,7 +32,7 @@ const NominationCard = (props) => {
                     <Typography variant="overline" style={{overflowX: true}}>
                         {props.nomination.Title.length > 40 ? props.handleMovieTitle(props.nomination.Title) : props.nomination.Title} ({props.handleYear(props.nomination.Year)})
                     </Typography>
-                    {!props.submitted ? <Button variant="outlined" size="small" className={classes.button} color="primary" onClick={() => props.handleRemoved(props.index)}>
+                    {!props.submitted ? <Button variant="contained" size="small" className={classes.button} color="secondary" onClick={() => props.handleRemoved(props.index)}>
                         Remove
                     </Button> : <Button variant="outlined" disabled size="small" className={classes.button}>
                         Remove

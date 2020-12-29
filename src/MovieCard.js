@@ -8,6 +8,11 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.secondary.contrastText,
+        padding: "1%"
+    },
+    button: {
+        float: "right",
         color: theme.palette.secondary.contrastText
     }
 }))
@@ -28,10 +33,10 @@ const MovieCard = (props) => {
                         {props.movie.Title.length > 45 ? props.handleMovieTitle(props.movie.Title, 45) : props.movie.Title} ({props.handleYear(props.movie.Year)})
                     </Typography>
                     {!props.listFull ? 
-                    <Button variant="outlined" size="small" style={{float: "right" }} color="primary" onClick={() => props.handleNominated(props.movie)}>
+                    <Button variant="contained" size="small" className={classes.button} color="primary" onClick={() => props.handleNominated(props.movie)}>
                         Nominate
                     </Button>
-                    : <Button variant="outlined" disabled style={{float: "right" }} size="small">
+                    : <Button variant="outlined" disabled className={classes.button} size="small">
                         Nominate
                     </Button>}
                 </Paper>

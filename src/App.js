@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Paper from '@material-ui/core/Paper'
-import {Typography, makeStyles, Button } from '@material-ui/core'
+import {Typography, makeStyles, Switch } from '@material-ui/core'
 import Nominations from './Nominations'
 import CheckResults from './CheckResults'
 import Alert from '@material-ui/lab/Alert';
@@ -19,7 +19,7 @@ const theme1 = createMuiTheme({
       main: '#5b5b5b',
       dark: '#323232',
       contrastText: 'whitesmoke',
-    }
+    },
   },
   typography: {
     fontFamily: [
@@ -38,10 +38,10 @@ const theme2 = createMuiTheme({
     },
     secondary: {
       light: '#FFFFFF',
-      main: '#FFFFFF',
-      dark: '#whitesmoke',
-      contrastText: 'whitesmoke',
-    }
+      main: '#F5F5F5',
+      dark: '#F5F5F5',
+      contrastText: '#222222',
+    },
   },
   typography: {
     fontFamily: [
@@ -50,7 +50,7 @@ const theme2 = createMuiTheme({
   },
 })
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     height: window.innerHeight * 1.10
   },
@@ -85,7 +85,11 @@ const useStyles = makeStyles({
     borderRadius: "5px 50px 50px 5px",
     float: "right"
   },
-})
+  switch: {
+    float: "right",
+    marginRight: "5%"
+  }
+}))
 
 const App = () => {
   const [movies, setMovies] = useState([])
@@ -115,7 +119,6 @@ const App = () => {
         }
       })
     }
-
   }
 
   const handleresultsPage = () => {
@@ -223,6 +226,7 @@ const handleMovieTitle = (title, length) => {
             Shoppies Movie Awards
           </Typography>
         </Paper>
+        <Switch size="small" color="primary" checked={darkMode} className={classes.switch} onChange={() => setDarkMode(!darkMode)} />
         {resultsPage ? null : <Nominations submitted={submitted} setResultsPage={setResultsPage} transitioning={transitioning} classes={classes} movies={movies} nominations={nominations} fetchMovies={fetchMovies} listFull={listFull} handleYear={handleYear} handleNominated={handleNominated} handleMovieTitle={handleMovieTitle} handleRemoved={handleRemoved} handleNominate={handleNominate}/>}
         {resultsPage ? <CheckResults submitted={submitted} nominations={nominations} setTransitioning={setTransitioning} setResultsPage={setResultsPage} handleYear={handleYear} handleMovieTitle={handleMovieTitle} /> : null}
       </Paper>
