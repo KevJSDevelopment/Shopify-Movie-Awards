@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Grow from '@material-ui/core/Grow'
-import { Grid, Paper, Typography, makeStyles, useTheme } from '@material-ui/core'
+import { Grid, Paper, Typography, makeStyles, useTheme, Tooltip} from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
     first: {
@@ -86,9 +86,11 @@ const NominationResult = (props) => {
             in={true} 
             {...(true ? { timeout: (props.index + 5) * 300 } : {})}>
                 <Paper id={`nomination-paper-${props.index}`} className={handleClass()} style={{border: userNominated ? `3px solid ${theme.palette.primary.light}`: "0"}} elevation={3}>
-                    <Typography variant="overline">
-                        {props.nomination.title.length > handleTextWidth() ? props.handleMovieTitle(props.nomination.title, handleTextWidth()) : props.nomination.title} ({props.handleYear(props.nomination.year)}): Nominations - {props.nomination.total}
-                    </Typography>
+                    <Tooltip title={`${props.nomination.title} (${props.handleYear(props.nomination.year)})`} arrow={true} placement="top">
+                        <Typography variant="overline">
+                            {props.nomination.title.length > handleTextWidth() ? props.handleMovieTitle(props.nomination.title, handleTextWidth()) : props.nomination.title} ({props.handleYear(props.nomination.year)}): Nominations - {props.nomination.total}
+                        </Typography>
+                    </Tooltip>
                 </Paper>
             </Grow>
         </Grid>

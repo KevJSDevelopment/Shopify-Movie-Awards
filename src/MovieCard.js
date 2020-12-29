@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Paper, Typography, Grid, Slide, Button , makeStyles} from '@material-ui/core'
+import { Paper, Typography, Grid, Slide, Button , makeStyles, Tooltip} from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
     item: {
@@ -14,7 +14,16 @@ const useStyles = makeStyles(theme => ({
     button: {
         float: "right",
         color: theme.palette.secondary.contrastText
+    },
+    card: {
+        zIndex: 2,
+        width: "50%",
+        float: "right"
+    },
+    title: {
+        overflowX: 'auto'
     }
+      
 }))
 
 const MovieCard = (props) => {
@@ -29,9 +38,11 @@ const MovieCard = (props) => {
             direction="up"
             {...(true ? { timeout: (props.index + 5) * 100 } : {})}>
                 <Paper id={`movie-paper-${props.index}`} className={classes.paper} elevation={!hover ? 3 : 20} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-                    <Typography variant="overline" style={{overflowX: true}}>
+                <Tooltip title={`${props.movie.Title} (${props.handleYear(props.movie.Year)})`} arrow={true} placement="top">
+                    <Typography variant="overline" className={classes.title}>
                         {props.movie.Title.length > 45 ? props.handleMovieTitle(props.movie.Title, 45) : props.movie.Title} ({props.handleYear(props.movie.Year)})
                     </Typography>
+                </Tooltip>
                     {!props.listFull ? 
                     <Button variant="contained" size="small" className={classes.button} color="primary" onClick={() => props.handleNominated(props.movie)}>
                         Nominate

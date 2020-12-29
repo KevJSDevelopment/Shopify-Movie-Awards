@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Paper, Typography, Grid, Slide, Button , makeStyles} from '@material-ui/core'
+import { Paper, Typography, Grid, Slide, Button , makeStyles, Tooltip} from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
     item: {
@@ -29,9 +29,11 @@ const NominationCard = (props) => {
             direction="up"
             {...(true ? { timeout: (props.index + 5) * 100 } : {})}>
                 <Paper id={`nomination-paper-${props.index}`} className={classes.paper} elevation={!hover ? 3 : 20} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-                    <Typography variant="overline" style={{overflowX: true}}>
-                        {props.nomination.Title.length > 40 ? props.handleMovieTitle(props.nomination.Title) : props.nomination.Title} ({props.handleYear(props.nomination.Year)})
-                    </Typography>
+                    <Tooltip title={`${props.nomination.Title} (${props.handleYear(props.nomination.Year)})`} arrow={true} placement="top">
+                        <Typography variant="overline" style={{overflowX: true}}>
+                            {props.nomination.Title.length > 40 ? props.handleMovieTitle(props.nomination.Title) : props.nomination.Title} ({props.handleYear(props.nomination.Year)})
+                        </Typography>
+                    </Tooltip>
                     {!props.submitted ? <Button variant="contained" size="small" className={classes.button} color="secondary" onClick={() => props.handleRemoved(props.index)}>
                         Remove
                     </Button> : <Button variant="outlined" disabled size="small" className={classes.button}>

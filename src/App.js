@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Paper from '@material-ui/core/Paper'
-import {Typography, makeStyles, Switch, useTheme } from '@material-ui/core'
+import {Typography, makeStyles, Switch } from '@material-ui/core'
 import Nominations from './Nominations'
 import CheckResults from './CheckResults'
 import Alert from '@material-ui/lab/Alert';
@@ -108,7 +108,6 @@ const App = () => {
   const [transitioning, setTransitioning] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
 
-  const theme = useTheme()
   const classes = useStyles()
 
   const fetchMovies = (search) => {
