@@ -124,7 +124,17 @@ const App = () => {
       .then((success) => success.json() )
       .then((movies) => {
         if(!movies.Error){
-          setMovies(movies.Search) 
+          const movieArr = []
+          movies.Search.forEach(movie => {
+            let selected = false
+            nominations.forEach(nomination => {
+                if(nomination.Title === movie.Title && nomination.Year === movie.Year){
+                    selected = true
+                }
+            });
+            movieArr.push({Title: movie.Title, Year: movie.Year, selected: selected})
+          })
+          setMovies(movieArr) 
         }
       })
     }
@@ -176,7 +186,8 @@ const App = () => {
       setListFull(false)
     }
   }
-  const handleNominated = (movie) => {
+
+  const handleNominated = async (movie) => {
     const arr = [...nominations]
     arr.push(movie)
     setNominations(arr)
@@ -192,7 +203,7 @@ const App = () => {
     })
   }
 
-  const handleRemoved = (index) => {
+  const handleRemoved = async (index) => {
     const arr = [...nominations]
     arr.splice(index, 1)
     setNominations(arr)
@@ -202,10 +213,10 @@ const App = () => {
     })
   }
 
-const handleMovieTitle = (title, length) => {
+  const handleMovieTitle = (title, length) => {
     const string = title.substring(0, length) + "..."
     return string
-}
+  }
 
   const handleYear = (year) => {
     const stringLength = year.length

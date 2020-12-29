@@ -29,7 +29,13 @@ const useStyles = makeStyles(theme => ({
 const MovieCard = (props) => {
     
     const [hover, setHover] = useState(false)
+    const [clicked, setClicked] = useState(false)
     const classes = useStyles()
+
+    const handleClick = () => {
+        props.handleNominated(props.movie)
+        setClicked(true)
+    }
 
     return (
         <Grid item xs={12} className={classes.item}>
@@ -43,13 +49,9 @@ const MovieCard = (props) => {
                         {props.movie.Title.length > 45 ? props.handleMovieTitle(props.movie.Title, 45) : props.movie.Title} ({props.handleYear(props.movie.Year)})
                     </Typography>
                 </Tooltip>
-                    {!props.listFull ? 
-                    <Button variant="contained" size="small" className={classes.button} color="primary" onClick={() => props.handleNominated(props.movie)}>
-                        Nominate
-                    </Button>
-                    : <Button variant="outlined" disabled className={classes.button} size="small">
-                        Nominate
-                    </Button>}
+                <Button variant="contained" size="small" disabled={props.listFull || props.movie.selected || clicked} className={classes.button} color="primary" onClick={() => handleClick()}>
+                    Nominate
+                </Button>
                 </Paper>
             </Slide>
         </Grid>

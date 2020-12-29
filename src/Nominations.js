@@ -67,7 +67,7 @@ const Nominations = (props) => {
                                     </Typography>
                                 </Grid>
                                     {props.movies !== [] ? props.movies.map((movie, index) => {
-                                    return <MovieCard movie={movie} listFull={props.listFull} handleMovieTitle={props.handleMovieTitle} handleYear={props.handleYear} handleNominated={props.handleNominated} index={index} key={index} />
+                                        return <MovieCard movie={movie} nominations={props.nominations} listFull={props.listFull} handleMovieTitle={props.handleMovieTitle} handleYear={props.handleYear} handleNominated={props.handleNominated} index={index} key={index} />
                                     }) : null}
                                 </Grid>
                             </Paper>
