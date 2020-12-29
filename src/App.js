@@ -167,9 +167,9 @@ const App = () => {
         body: JSON.stringify({title: nomination.Title, year: nomination.Year})
       })
       const data = await res.json()
-      // if(!data.auth){
-      //   return <Alert severity="error">{data.message}</Alert>
-      // }
+      if(!data.auth){
+        return <Alert severity="error">{data.message}</Alert>
+      }
     })
     localStorage.setItem("submitted", "true")
     setSubmitted(true)
@@ -187,7 +187,7 @@ const App = () => {
     }
   }
 
-  const handleNominated = async (movie) => {
+  const handleNominated = (movie) => {
     const arr = [...nominations]
     arr.push(movie)
     setNominations(arr)
@@ -211,6 +211,9 @@ const App = () => {
     arr.forEach((nomination, index) => {
       localStorage.setItem(`nomination-${index}`, [nomination.Title, nomination.Year])
     })
+    const search = document.querySelector("#outlined-search")
+    search.value = ""
+    fetchMovies(search.value)
   }
 
   const handleMovieTitle = (title, length) => {
