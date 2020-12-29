@@ -34,8 +34,11 @@ const useStyles = makeStyles(theme => ({
     paper: {
         backgroundColor: theme.palette.secondary.main,
         color: theme.palette.secondary.contrastText
-    }
-  }))
+    },
+    label: {
+        color: theme.palette.secondary.contrastText,
+    },
+}))
 
 const Nominations = (props) => {
 
@@ -46,7 +49,7 @@ const Nominations = (props) => {
             <Grid container direction="column" alignItems="center" spacing={3}>
                 <Grid item xs={12} className={classes.gridItems}>
                     <Paper elevation={3} className={classes.search}>
-                        <TextField id="outlined-search" fullWidth={true} label="Search Movies" type="search" autoComplete="off" variant="standard" onChange={(ev) => props.fetchMovies(ev.target.value)}/>
+                        <TextField id="outlined-search" fullWidth={true} InputLabelProps={{className: classes.label}} label="Search Movies" type="search" autoComplete="off" variant="standard" onChange={(ev) => props.fetchMovies(ev.target.value)}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} className={classes.gridItems}>
