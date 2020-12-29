@@ -7,7 +7,8 @@ const useStyles = makeStyles(theme => ({
         marginRight: "1%",
     },
     paper: {
-        backgroundColor: theme.palette.secondary.light
+        backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.secondary.contrastText
     }
 }))
 

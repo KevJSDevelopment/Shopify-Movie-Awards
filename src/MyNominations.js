@@ -4,7 +4,8 @@ import MyNominationCard from './MyNominationCard'
 const useStyles = makeStyles(theme => ({
     title: {
         textAlign: "center",
-        backgroundColor: theme.palette.secondary.main
+        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.secondary.contrastText
     }
 }))
 

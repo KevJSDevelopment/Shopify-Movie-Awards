@@ -13,11 +13,13 @@ const useStyles = makeStyles(theme => ({
         marginLeft: "45%",
         marginRight: "45%",
         marginBottom: "2%",
-        backgroundColor: theme.palette.secondary.main
+        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.secondary.contrastText
     },
     back: {
         borderRadius: "25px 5px 5px 25px",
-        marginLeft: "5%"
+        marginLeft: "5%",
+        color: theme.palette.secondary.contrastText
     }
 }))
 

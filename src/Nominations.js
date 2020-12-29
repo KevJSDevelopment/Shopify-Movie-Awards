@@ -7,7 +7,8 @@ const useStyles = makeStyles(theme => ({
     search: {
       marginRight: "10%",
       marginLeft: "10%",
-      backgroundColor: theme.palette.secondary.main
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText
     },
     movieContainer: {
       marginLeft: "5%", 
@@ -27,10 +28,12 @@ const useStyles = makeStyles(theme => ({
       width: "25%",
       margin: "3%",
       borderRadius: "5px 50px 50px 5px",
-      float: "right"
+      float: "right",
+      color: theme.palette.secondary.contrastText
     },
     paper: {
-        backgroundColor: theme.palette.secondary.main
+        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.secondary.contrastText
     }
   }))
 

@@ -7,6 +7,7 @@ const useStyles = makeStyles(theme => ({
         marginLeft: "2%",
         marginRight: "2%",
         backgroundColor: "#ffd700",
+        color: theme.palette.secondary.contrastText,
         padding: "5px",
         width: "95%"
     },
@@ -14,6 +15,7 @@ const useStyles = makeStyles(theme => ({
         marginLeft: "4%",
         marginRight: "4%",
         backgroundColor: "#bec2cb",
+        color: theme.palette.secondary.contrastText,
         padding: "5px",
         width: "90%"
     },
@@ -21,6 +23,7 @@ const useStyles = makeStyles(theme => ({
         marginLeft: "6%",
         marginRight: "6%",
         backgroundColor: "#cd7f32",
+        color: theme.palette.secondary.contrastText,
         padding: "5px",
         width: "85%"
     },
@@ -29,7 +32,8 @@ const useStyles = makeStyles(theme => ({
         marginLeft: "8%",
         marginRight: "8%",
         padding: "5px",
-        backgroundColor: theme.palette.secondary.light
+        backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.secondary.contrastText
     }
 }))
 

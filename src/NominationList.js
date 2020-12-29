@@ -10,10 +10,11 @@ const useStyles = makeStyles(theme => ({
         overflowY: "auto",
         maxHeight: window.innerHeight * .7,
         padding: "1%",
-        backgroundColor: theme.palette.secondary.main
+        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.secondary.contrastText
     },
     title: {
-        textAlign: "center"
+        textAlign: "center",
     }
 }))
 

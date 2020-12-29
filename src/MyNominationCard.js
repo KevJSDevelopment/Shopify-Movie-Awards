@@ -6,6 +6,7 @@ const useStyles = makeStyles(theme => ({
         margin: "2%"
     },
     paper: {
+        color: theme.palette.secondary.contrastText,
         backgroundColor: theme.palette.secondary.light
     }
 }))

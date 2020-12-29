@@ -10,7 +10,8 @@ const useStyles = makeStyles(theme => ({
         float: "right"
     },
     paper: {
-        backgroundColor: theme.palette.secondary.light
+        backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.secondary.contrastText
     }
 }))
 
