@@ -5,6 +5,8 @@ import Nominations from './Nominations'
 import CheckResults from './CheckResults'
 import Alert from '@material-ui/lab/Alert';
 import {ThemeProvider, createMuiTheme} from '@material-ui/core'
+import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
+import Brightness3Icon from '@material-ui/icons/Brightness3';
 
 const theme1 = createMuiTheme({
   palette: {
@@ -88,6 +90,12 @@ const useStyles = makeStyles(theme => ({
   switch: {
     float: "right",
     marginRight: "5%"
+  },
+  light: {
+    float: "right"
+  },
+  dark: {
+    float: "right"
   }
 }))
 
@@ -226,7 +234,9 @@ const handleMovieTitle = (title, length) => {
             Shoppies Movie Awards
           </Typography>
         </Paper>
+        <Brightness3Icon className={classes.dark} />
         <Switch size="small" color="primary" checked={darkMode} className={classes.switch} onChange={() => setDarkMode(!darkMode)} />
+        <BrightnessHighIcon className={classes.light} /> 
         {resultsPage ? null : <Nominations submitted={submitted} setResultsPage={setResultsPage} transitioning={transitioning} classes={classes} movies={movies} nominations={nominations} fetchMovies={fetchMovies} listFull={listFull} handleYear={handleYear} handleNominated={handleNominated} handleMovieTitle={handleMovieTitle} handleRemoved={handleRemoved} handleNominate={handleNominate}/>}
         {resultsPage ? <CheckResults submitted={submitted} nominations={nominations} setTransitioning={setTransitioning} setResultsPage={setResultsPage} handleYear={handleYear} handleMovieTitle={handleMovieTitle} /> : null}
       </Paper>
