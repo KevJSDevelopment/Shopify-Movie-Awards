@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Paper from '@material-ui/core/Paper'
-import {Typography, makeStyles, Switch } from '@material-ui/core'
+import {Typography, makeStyles, Switch, Grid } from '@material-ui/core'
 import Nominations from './Nominations'
 import CheckResults from './CheckResults'
 import Alert from '@material-ui/lab/Alert';
 import {ThemeProvider, createMuiTheme} from '@material-ui/core'
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
 import Brightness3Icon from '@material-ui/icons/Brightness3';
+import Reset from './Reset'
 
 const theme1 = createMuiTheme({
   palette: {
@@ -54,7 +55,7 @@ const theme2 = createMuiTheme({
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: window.innerHeight * 1.10
+    height: window.innerHeight * 1.2
   },
   header: {
     marginBottom: "1%"
@@ -233,6 +234,15 @@ const App = () => {
     return year
   }
 
+  const reset = () => {
+    localStorage.clear()
+    setResultsPage(false)
+    setNominations([])
+    setSubmitted(false)
+    setTransitioning(false)
+    fetchMovies("")
+  }
+
   useEffect(() => {
     checkListFull()
   }, [nominations])
@@ -254,6 +264,7 @@ const App = () => {
         <BrightnessHighIcon className={classes.light} color={darkMode ? "secondary" : "primary"}/> 
         {resultsPage ? null : <Nominations submitted={submitted} setResultsPage={setResultsPage} transitioning={transitioning} classes={classes} movies={movies} nominations={nominations} fetchMovies={fetchMovies} listFull={listFull} handleYear={handleYear} handleNominated={handleNominated} handleMovieTitle={handleMovieTitle} handleRemoved={handleRemoved} handleNominate={handleNominate}/>}
         {resultsPage ? <CheckResults submitted={submitted} nominations={nominations} setTransitioning={setTransitioning} setResultsPage={setResultsPage} handleYear={handleYear} handleMovieTitle={handleMovieTitle} /> : null}
+        {submitted ? <Reset reset={reset} submitted={submitted} /> : null}
       </Paper>
     </ThemeProvider>
   );

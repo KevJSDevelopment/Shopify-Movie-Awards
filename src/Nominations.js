@@ -48,12 +48,17 @@ const Nominations = (props) => {
 
     const classes = useStyles()
 
+    const handleGetMovies = (ev) => {
+        props.fetchMovies("")
+        props.fetchMovies(ev.target.value)
+    }
+
     return (
         <Slide in={!props.transitioning} direction="right" timeout={{exit: 2000, enter:  0}}>
             <Grid container direction="column" alignItems="center" spacing={3}>
                 <Grid item xs={12} className={classes.gridItems}>
                     <Paper elevation={3} className={classes.search}>
-                        <TextField id="outlined-search" fullWidth={true} InputLabelProps={{className: classes.label}} InputProps={{className: classes.input}} label="Search Movies" type="search" autoComplete="off" variant="standard" onChange={(ev) => props.fetchMovies(ev.target.value)}/>
+                        <TextField id="outlined-search" fullWidth={true} InputLabelProps={{className: classes.label}} InputProps={{className: classes.input}} label="Search Movies" type="search" autoComplete="off" variant="standard" onChange={(ev) => handleGetMovies(ev)}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} className={classes.gridItems}>
