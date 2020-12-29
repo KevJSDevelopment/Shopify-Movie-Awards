@@ -21,7 +21,7 @@ const Reset = (props) => {
             <Grid container direction="column" alignItems="center" className={classes.reset}>
                 <Grid item xs={12}>
                     <Button variant="contained" className={classes.button} size="small" color="primary" onClick={() => props.reset()}>
-                        Nominate More?
+                        Nominate Again?
                     </Button>
                 </Grid>
                 <Grid item xs={12}>
