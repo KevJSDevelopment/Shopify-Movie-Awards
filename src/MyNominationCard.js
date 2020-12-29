@@ -7,7 +7,8 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         color: theme.palette.secondary.contrastText,
-        backgroundColor: theme.palette.secondary.light
+        backgroundColor: theme.palette.secondary.light,
+        border: `3px solid ${theme.palette.primary.light}`
     }
 }))
 

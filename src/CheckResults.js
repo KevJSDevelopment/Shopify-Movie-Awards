@@ -55,7 +55,7 @@ const CheckResults = (props) => {
                         </Grid>
                         <Grid item xs={5}>
                             <Grow in={props.submitted} timeout={4000}>
-                                <NominationList handleYear={props.handleYear} handleMovieTitle={props.handleMovieTitle}/>
+                                <NominationList handleYear={props.handleYear} nominations={props.nominations} handleMovieTitle={props.handleMovieTitle}/>
                             </Grow>
                         </Grid>
                         <Grid item xs={5}>

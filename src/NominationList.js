@@ -46,7 +46,7 @@ const NominationList = (props) => {
                     </Typography>
                 </Grid>
                 {allNominations !== [] ? allNominations.map( (nomination, index) => {
-                    return <NominationResult nomination={nomination} handleYear={props.handleYear} handleMovieTitle={props.handleMovieTitle} index={index} key={index} />
+                    return <NominationResult nomination={nomination} nominations={props.nominations} handleYear={props.handleYear} handleMovieTitle={props.handleMovieTitle} index={index} key={index} />
                 }) : null}
             </Grid>   
         </Paper>

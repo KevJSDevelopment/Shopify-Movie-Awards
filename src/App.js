@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Paper from '@material-ui/core/Paper'
-import {Typography, makeStyles, Switch } from '@material-ui/core'
+import {Typography, makeStyles, Switch, useTheme } from '@material-ui/core'
 import Nominations from './Nominations'
 import CheckResults from './CheckResults'
 import Alert from '@material-ui/lab/Alert';
@@ -89,13 +89,13 @@ const useStyles = makeStyles(theme => ({
   },
   switch: {
     float: "right",
-    marginRight: "5%"
   },
   light: {
     float: "right"
   },
   dark: {
-    float: "right"
+    float: "right",
+    marginRight: "5%"
   }
 }))
 
@@ -106,7 +106,9 @@ const App = () => {
   const [submitted, setSubmitted] = useState(false)
   const [resultsPage, setResultsPage] = useState(false)
   const [transitioning, setTransitioning] = useState(false)
-  const [darkMode, setDarkMode] = useState(true)
+  const [darkMode, setDarkMode] = useState(false)
+
+  const theme = useTheme()
   const classes = useStyles()
 
   const fetchMovies = (search) => {
@@ -234,9 +236,9 @@ const handleMovieTitle = (title, length) => {
             Shoppies Movie Awards
           </Typography>
         </Paper>
-        <Brightness3Icon className={classes.dark} />
+        <Brightness3Icon className={classes.dark} style={{color: darkMode ? theme1.palette.primary.main : theme1.palette.secondary.light}}/>
         <Switch size="small" color="primary" checked={darkMode} className={classes.switch} onChange={() => setDarkMode(!darkMode)} />
-        <BrightnessHighIcon className={classes.light} /> 
+        <BrightnessHighIcon className={classes.light} color={darkMode ? "secondary" : "primary"}/> 
         {resultsPage ? null : <Nominations submitted={submitted} setResultsPage={setResultsPage} transitioning={transitioning} classes={classes} movies={movies} nominations={nominations} fetchMovies={fetchMovies} listFull={listFull} handleYear={handleYear} handleNominated={handleNominated} handleMovieTitle={handleMovieTitle} handleRemoved={handleRemoved} handleNominate={handleNominate}/>}
         {resultsPage ? <CheckResults submitted={submitted} nominations={nominations} setTransitioning={setTransitioning} setResultsPage={setResultsPage} handleYear={handleYear} handleMovieTitle={handleMovieTitle} /> : null}
       </Paper>

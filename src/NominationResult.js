@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Grow from '@material-ui/core/Grow'
-import { Grid, Paper, Typography, makeStyles } from '@material-ui/core'
+import { Grid, Paper, Typography, makeStyles, useTheme } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
     first: {
@@ -39,8 +39,9 @@ const useStyles = makeStyles(theme => ({
 
 const NominationResult = (props) => {
 
+    const [userNominated, setUserNominated] = useState(false)
     const classes = useStyles()
-
+    const theme = useTheme()
     const handleClass = () => {
         switch (props.index) {
             case 0:
@@ -67,25 +68,24 @@ const NominationResult = (props) => {
         }
     }
 
-    const handlePlacement = () => {
-        switch (props.index) {
-            case 0:
-                return <b>(1st)</b>
-            case 1:
-                return <b>(2nd)</b>
-            case 2:
-                return <b>(3rd)</b>
-            default:
-                return null
-        }
+    const checkIfUserNominated = () => {
+        props.nominations.forEach(nom => {
+            if(nom.Title === props.nomination.title){
+                setUserNominated(true)
+            }
+        })
     }
+
+    useEffect(() => {
+        checkIfUserNominated()
+    }, [])
 
     return (
         <Grid item xs={12}>
             <Grow 
             in={true} 
             {...(true ? { timeout: (props.index + 5) * 300 } : {})}>
-                <Paper id={`nomination-paper-${props.index}`} className={handleClass()} elevation={3}>
+                <Paper id={`nomination-paper-${props.index}`} className={handleClass()} style={{border: userNominated ? `3px solid ${theme.palette.primary.light}`: "0"}} elevation={3}>
                     <Typography variant="overline">
                         {props.nomination.title.length > handleTextWidth() ? props.handleMovieTitle(props.nomination.title, handleTextWidth()) : props.nomination.title} ({props.handleYear(props.nomination.year)}): Nominations - {props.nomination.total}
                     </Typography>
