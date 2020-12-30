@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.js": "/Shopify-Movie-Awards/static/js/main.6e9b225b.chunk.js",
+    "main.js.map": "/Shopify-Movie-Awards/static/js/main.6e9b225b.chunk.js.map",
+    "runtime-main.js": "/Shopify-Movie-Awards/static/js/runtime-main.549bcec8.js",
+    "runtime-main.js.map": "/Shopify-Movie-Awards/static/js/runtime-main.549bcec8.js.map",
+    "static/js/2.820fdfc3.chunk.js": "/Shopify-Movie-Awards/static/js/2.820fdfc3.chunk.js",
+    "static/js/2.820fdfc3.chunk.js.map": "/Shopify-Movie-Awards/static/js/2.820fdfc3.chunk.js.map",
+    "index.html": "/Shopify-Movie-Awards/index.html",
+    "static/js/2.820fdfc3.chunk.js.LICENSE.txt": "/Shopify-Movie-Awards/static/js/2.820fdfc3.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.549bcec8.js",
+    "static/js/2.820fdfc3.chunk.js",
+    "static/js/main.6e9b225b.chunk.js"
+  ]
+}
