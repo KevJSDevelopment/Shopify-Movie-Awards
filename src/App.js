@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Paper from '@material-ui/core/Paper'
-import {Typography, makeStyles, Switch, Grid } from '@material-ui/core'
+import {Typography, makeStyles, Switch } from '@material-ui/core'
 import Nominations from './Nominations'
 import CheckResults from './CheckResults'
-import Alert from '@material-ui/lab/Alert';
 import {ThemeProvider, createMuiTheme} from '@material-ui/core'
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
 import Brightness3Icon from '@material-ui/icons/Brightness3';
@@ -164,21 +163,16 @@ const App = () => {
     const server = process.env.REACT_APP_SERVER
     
     nominations.forEach(async (nomination) => {
-      const res = await fetch(`${server}/nominations`, {
+      await fetch(`${server}/nominations`, {
         method: "POST",
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify({title: nomination.Title, year: nomination.Year})
       })
-      const data = await res.json()
-      if(!data.auth){
-        return <Alert severity="error">{data.message}</Alert>
-      }
     })
     localStorage.setItem("submitted", "true")
     setSubmitted(true)
     setTransitioning(true)
     setTimeout(handleresultsPage, 2500)
-    // return <Alert severity="success"> Successfully nominated: {nominations.forEach(nomination => `${nomination.Title}, (${nomination.Year}), `)} </Alert>
   }
 
   const checkListFull = () => {
