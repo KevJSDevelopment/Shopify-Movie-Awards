@@ -23,9 +23,10 @@ const NominationList = (props) => {
     const [allNominations, setAllNominations] = useState([])
 
     const classes = useStyles()
-
+    
     const getAllNominations = async () => {
-        const res = await fetch(`http://localhost:3000/nominations`)
+        const server = process.env.REACT_APP_SERVER
+        const res = await fetch(`${server}/nominations`)
             
         const data = await res.json()
 

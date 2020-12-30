@@ -161,8 +161,10 @@ const App = () => {
   }
 
   const handleNominate = async () => {
+    const server = process.env.REACT_APP_SERVER
+    
     nominations.forEach(async (nomination) => {
-      const res = await fetch(`http://localhost:3000/nominations`, {
+      const res = await fetch(`${server}/nominations`, {
         method: "POST",
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify({title: nomination.Title, year: nomination.Year})
