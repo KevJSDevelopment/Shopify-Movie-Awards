@@ -120,7 +120,7 @@ const App = () => {
       setMovies([])
     }
     if(arr[arr.length - 1] !== " "){
-      fetch(`http://www.omdbapi.com/?s=${search}&apikey=${key}`)
+      fetch(`https://www.omdbapi.com/?s=${search}&apikey=${key}`)
       .then((success) => success.json() )
       .then((movies) => {
         if(!movies.Error){
