@@ -189,13 +189,6 @@ const App = () => {
     arr.push(movie)
     setNominations(arr)
     arr.forEach((nomination, index) => {
-      /*
-        Using localStorage instead of storing info in the backend database because user should not be required to sign in.
-        This way:  
-          1) Data still persists 
-          2) User can cast nominations without signing up or signing in
-          3) The only data stored in local storage is publicly accessable information from the api
-      */
       localStorage.setItem(`nomination-${index}`, [nomination.Title, nomination.Year])
     })
   }
