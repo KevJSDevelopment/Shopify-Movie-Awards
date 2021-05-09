@@ -68,7 +68,7 @@ const NominationResult = (props) => {
         }
     }
 
-    const checkIfUserNominated = () => {
+    const checkIfUserNominated = (nomination) => {
         props.nominations.forEach(nom => {
             if(nom.Title === props.nomination.title){
                 setUserNominated(true)

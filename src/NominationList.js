@@ -43,7 +43,7 @@ const NominationList = (props) => {
             <Grid container direction="column">
                 <Grid item xs={12} className={classes.title}>
                     <Typography variant="overline">
-                        <u>All Nominations</u>
+                        <u>Top Nominations</u>
                     </Typography>
                 </Grid>
                 {allNominations !== [] ? allNominations.map( (nomination, index) => {
